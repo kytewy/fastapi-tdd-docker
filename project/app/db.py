@@ -1,14 +1,12 @@
-
 import logging  # new
 import os
+from typing import Union
 
 from fastapi import FastAPI
 from tortoise import Tortoise, run_async  # new
 from tortoise.contrib.fastapi import register_tortoise
-from typing import Union
 
-
-log = logging.getLogger("uvicorn") # new
+log = logging.getLogger("uvicorn")  # new
 
 
 TORTOISE_ORM = {
@@ -44,11 +42,13 @@ async def generate_schema() -> None:
     await Tortoise.generate_schemas()
     await Tortoise.close_connections()
 
+
 async def get(id: int) -> Union[dict, None]:
     summary = await TextSummary.filter(id=id).first().values()
     if summary:
         return summary
     return None
+
 
 # new
 if __name__ == "__main__":

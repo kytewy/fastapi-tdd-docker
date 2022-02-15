@@ -6,9 +6,6 @@ from app import main
 # Then	the expected changes based on the behavior:         asserts
 
 def test_ping(test_app):
-    # Given test_app
-    # When
     response = test_app.get("/ping")
-    # Then
     assert response.status_code == 200
-    assert response.json() == {"environment": "dev", "ping": "pong!", "testing": True}
+    assert response.json() == {"environment": "dev", "ping": "pong", "testing": True}
